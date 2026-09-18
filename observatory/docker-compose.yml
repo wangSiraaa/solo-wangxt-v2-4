@@ -1,0 +1,41 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: observatory
+      POSTGRES_PASSWORD: observatory
+      POSTGRES_DB: observatory
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U observatory"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+  api:
+    build: ./backend
+    environment:
+      # PostgreSQL：生产用持久数据库
+      DATABASE_URL: postgresql+psycopg2://observatory:observatory@db:5432/observatory
+      OBS_LAT: "31.95"
+      OBS_LON: "-111.6"
+      OBS_HEIGHT: "2200"
+      GRID_STEP_SEC: "60"
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  web:
+    build: ./frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+
+volumes:
+  pgdata:
