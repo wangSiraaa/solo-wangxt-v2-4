@@ -1,0 +1,6 @@
+pyproject.toml
+nightplan.egg-info/PKG-INFO
+nightplan.egg-info/SOURCES.txt
+nightplan.egg-info/dependency_links.txt
+nightplan.egg-info/requires.txt
+nightplan.egg-info/top_level.txt

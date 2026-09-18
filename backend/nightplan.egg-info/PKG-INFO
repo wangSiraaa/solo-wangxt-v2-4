@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: nightplan
+Version: 0.1.0
+Summary: 天文台观测提案 -> 夜间可执行计划 排程服务
+Requires-Python: >=3.10
+Requires-Dist: fastapi>=0.110
+Requires-Dist: uvicorn[standard]>=0.27
+Requires-Dist: sqlalchemy>=2.0
+Requires-Dist: psycopg2-binary>=2.9
+Requires-Dist: astropy>=6.0
+Requires-Dist: pydantic>=2.6
+Requires-Dist: httpx>=0.27
